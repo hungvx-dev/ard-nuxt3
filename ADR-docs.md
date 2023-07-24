@@ -1,17 +1,21 @@
 ### Context and Problem Statement
 
+...
+
 ### Why NuxtJS
+
+...
 
 ### Considered Options
 
-**Pros:**
+##### Pros:
 
 - It's great for SEO: it solves all the SEO issues that single-page apps are reputed for (client-rendered content, mobile web performance, URL and routing, etc.).
 - Code splitting: Nuxt automatically splits your code into smaller chunks, which can help reduce the initial load time of your application.
 - Server-side rendering out of the box: Nuxt comes with built-in SSR capabilities, so you don't have to set up a separate server yourself.
 - Better performance on low-powered devices: it reduces the amount of JavaScript that needs to be downloaded and executed on the client-side, which can be beneficial for low-powered devices that may struggle with processing heavy JavaScript applications.
 
-**Cons:**
+##### Cons:
 
 - Common plugins that don't exist or which aren't that solid (lack of support for standard plugins). There are Vue plugins designed to work on the client-side only (the server just wasn't added to the "big picture" when they were being developed).
 - There's a relatively small community behind it:
@@ -29,7 +33,7 @@
 ├── .nuxt
 ├── assets
 │   └── css
-│       └── taidwind.css
+│       └── tailwind.css
 ├── components
 │   ├── Counter
 │   │   └── index.vue
@@ -46,15 +50,15 @@
 ├── pages
 │   ├── about.vue
 │   ├── carts
-│   │   ├── [slug]
-│   │   │   ├── categories
-│   │   │   │   ├── [id].vue
-│   │   │   │   └── index.vue
-│   │   │   └── index.vue
+│   │   ├── [id].vue
 │   │   └── index.vue
 │   ├── index.vue
 │   └── products
-│       ├── [id].vue
+│       ├── [slug]
+│       │   ├── categories
+│       │   │   ├── [id].vue
+│       │   │   └── index.vue
+│       │   └── index.vue
 │       └── index.vue
 ├── public
 │   └── favicon.ico
@@ -75,14 +79,17 @@
 └── tsconfig.json
 </pre>
 
-1.  `.nuxt`: This folder contains everything needed to generate your vue application and is required that you do not make changes to any file in this directory.
-2.  `.output`: This folder holds all build files when building your Nuxt application to production (nuxt build). It is also required that you do not touch files in this directory when deploying your application to production.
-3.  `assets`: The assets folder holds all website’s assets the build tools will process. Usually your stylesheets, fonts and images that are not going to be served by the server can be placed in this folder.
-4.  `public`: This was previously known as the static folder in Nuxt 2 but in Nuxt 3 the public folder is used as a public server for static assets publicly available at a defined URL of your application.
-5.  `components`: It holds all our Vue components to be reused in our pages or other components. Nuxt 3 auto imports all our components created in this folder so we don’t have to manually import them before using them.
-6.  `composables`: Composables are functions that leverage Vue.js composition API to create reusable stateful logic. Composables help in preventing repetition in writing functions that apply in multiple components. Just like components, Nuxt 3 auto imports composables created in this folder.
-7.  `layouts`: Provides a structure for your Vue.js pages. As your app complexity increases you may want to define different layouts for different pages or components. The layout folder holds your layout files and are automatically loaded via asynchronous import
-8.  `middleware`: Middlewares are custom functions that can be executed before rendering either a page or a group of pages (layout)
-9.  `pages`: Pages represent views for each specific route pattern. Every file in the _pages/_ directory represents a different route displaying its content.
-10. `plugins`: The plugins directory contains JavaScript codes you want to execute before instantiating the root Vue.js Application. This is the place to add Vue plugins and inject functions or constants.
-11. `stores`: The store directory contains all your state global (Vuex/Pinia store files), and it is split into modules by default.
+- `.nuxt`: contains everything needed to generate your vue application and is required that you do not make changes to any file in this directory.
+- `.output`: holds all build files when building your Nuxt application to production (nuxt build). It is also required that you do not touch files in this directory when deploying your application to production.
+- `assets`: is used to add all the website's assets that the build tool (webpack or Vite) will process.
+  - Stylesheets (CSS, SASS, etc.)
+  - Fonts
+  - Images that won't be served from the public/ directory.
+- `components`: is where you put all your Vue components which can then be imported inside your pages or other components. Nuxt automatically imports any components in your _components/_ directory.
+- `composables`: is functions that leverage Vue.js composition API to create reusable stateful logic. Composables help in preventing repetition in writing functions that apply in multiple components. Just like components, Nuxt 3 auto imports composables created in this folder.
+- `layouts`: provides a structure for your Vue.js pages. As your app complexity increases you may want to define different layouts for different pages or components. The layout folder holds your layout files and are automatically loaded via asynchronous import
+- `middleware`: is custom functions that can be executed before rendering either a page or a group of pages (layout)
+- `pages`: represent views for each specific route pattern. Every file in the _pages/_ directory represents a different route displaying its content.
+- `public`: is directly served at the server root and contains public files that have to keep their names (e.g. robots.txt) or likely won't change (e.g. favicon.ico).This is known as the static/ directory in Nuxt 2.
+- `plugins`: contains JavaScript codes you want to execute before instantiating the root Vue.js Application. This is the place to add Vue plugins and inject functions or constants.
+- `stores`: contains all your global state (Vuex/Pinia store files), and it is split into modules by default.
