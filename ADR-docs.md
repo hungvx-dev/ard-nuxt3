@@ -93,3 +93,38 @@
 - `public`: is directly served at the server root and contains public files that have to keep their names (e.g. robots.txt) or likely won't change (e.g. favicon.ico).This is known as the static/ directory in Nuxt 2.
 - `plugins`: contains JavaScript codes you want to execute before instantiating the root Vue.js Application. This is the place to add Vue plugins and inject functions or constants.
 - `stores`: contains all your global state (Vuex/Pinia store files), and it is split into modules by default.
+
+### Views
+
+### Assets
+
+Nuxt uses two directories to handle assets like stylesheets, fonts or images.
+
+- The `public/` directory content is served at the server root as-is.
+- The `assets/` directory contains by convention every asset that you want the build tool (Vite or webpack) to process.
+
+#### `public/` Directory
+
+The public/ directory is used as a public server for static assets publicly available at a defined URL of your application.
+
+Example: referencing an image file in the `public/img/` directory, available at the static URL `/img/nuxt.png`:
+
+```vue
+<template>
+  <img src="/img/nuxt.png" alt="Discover Nuxt 3" />
+</template>
+```
+
+#### `assets/` Directory
+
+Nuxt uses Vite or webpack to build and bundle your application. The main function of these build tools is to process JavaScript files, but they can be extended through plugins (for Vite) or loaders (for webpack) to process other kind of assets, like stylesheets, fonts or SVG
+
+Example: referencing an image file that will be processed if a build tool is configured to handle this file extension:
+
+```vue
+<template>
+  <img src="~/assets/img/nuxt.png" alt="Discover Nuxt 3" />
+</template>
+```
+
+### Routing
