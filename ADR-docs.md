@@ -84,12 +84,12 @@
 - `assets`: is used to add all the website's assets that the build tool (webpack or Vite) will process.
   - Stylesheets (CSS, SASS, etc.)
   - Fonts
-  - Images that won't be served from the public/ directory.
-- `components`: is where you put all your Vue components which can then be imported inside your pages or other components. Nuxt automatically imports any components in your _components/_ directory.
+  - Images that won't be served from the **public/** directory.
+- `components`: is where you put all your Vue components which can then be imported inside your pages or other components. Nuxt automatically imports any components in your **components/** directory.
 - `composables`: is functions that leverage Vue.js composition API to create reusable stateful logic. Composables help in preventing repetition in writing functions that apply in multiple components. Just like components, Nuxt 3 auto imports composables created in this folder.
 - `layouts`: provides a structure for your Vue.js pages. As your app complexity increases you may want to define different layouts for different pages or components. The layout folder holds your layout files and are automatically loaded via asynchronous import
 - `middleware`: is custom functions that can be executed before rendering either a page or a group of pages (layout)
-- `pages`: represent views for each specific route pattern. Every file in the _pages/_ directory represents a different route displaying its content.
+- `pages`: represent views for each specific route pattern. Every file in the **pages/** directory represents a different route displaying its content.
 - `public`: is directly served at the server root and contains public files that have to keep their names (e.g. robots.txt) or likely won't change (e.g. favicon.ico).This is known as the static/ directory in Nuxt 2.
 - `plugins`: contains JavaScript codes you want to execute before instantiating the root Vue.js Application. This is the place to add Vue plugins and inject functions or constants.
 - `stores`: contains all your global state (Vuex/Pinia store files), and it is split into modules by default.
@@ -107,7 +107,7 @@ Nuxt uses two directories to handle assets like stylesheets, fonts or images.
 
 The public/ directory is used as a public server for static assets publicly available at a defined URL of your application.
 
-Example: referencing an image file in the `public/img/` directory, available at the static URL `/img/nuxt.png`:
+**Example**: referencing an image file in the `public/img/` directory, available at the static URL `/img/nuxt.png`:
 
 ```vue
 <template>
@@ -119,7 +119,7 @@ Example: referencing an image file in the `public/img/` directory, available at 
 
 Nuxt uses Vite or webpack to build and bundle your application. The main function of these build tools is to process JavaScript files, but they can be extended through plugins (for Vite) or loaders (for webpack) to process other kind of assets, like stylesheets, fonts or SVG
 
-Example: referencing an image file that will be processed if a build tool is configured to handle this file extension:
+**Example**: referencing an image file that will be processed if a build tool is configured to handle this file extension:
 
 ```vue
 <template>
@@ -128,3 +128,65 @@ Example: referencing an image file that will be processed if a build tool is con
 ```
 
 ### Routing
+
+Nuxt routes are defined using file and directory names in the **pages/** directory. Pages are Vue components and can have any valid extension that Nuxt supports (by default **.vue**, **.js**, **.jsx**, **.mjs**, **.ts** or **.tsx**). Nuxt will automatically create a route for every page in your **~/pages/** directory.
+
+For example, the file `/pages/products/banana.vue` will have the URL `https://www.domain.com/products/banana`.
+
+#### Nested Routes
+
+#### Dynamic Routes
+
+If you place anything within square brackets, it will be turned into a dynamic route parameter. You can mix and match multiple parameters and even non-dynamic text within a file name or directory.
+
+**Example**
+
+- Dynamic on files
+
+<pre>
+└── pages
+    └── carts
+        ├── [id].vue (will match `/carts/1` , `/carts/2`, ...)
+        └── index.vue (will match `/carts`)
+</pre>
+
+- Dynamic on folders
+<pre>
+└── pages
+    └── products
+        ├── [id]
+        │   ├── categories
+        │   │   ├── [id].vue (will match `/products/1/categories/1`, `/products/1/categories/2`, ...)
+        │   │   └── index.vue (will match `/products/1/categories`, `/products/2/categories`, ...)
+        │   └── index.vue (will match `/products/1`, `/products/2`, ... )
+        └── index.vue (will match `/products`)
+</pre>
+
+- Dynamic on folder name
+<pre>
+└── pages
+    └── users-[group]
+        └── index.vue (will match `/users-admin`, `/users-staff`, ...)
+</pre>
+
+If you want a parameter to be optional, you must enclose it in double square brackets.
+
+**Example**
+
+<pre>
+└── pages
+    └── [[slug]] (will match `/test`, `/carts`, ...)
+        └── index.vue (will match `/`)
+</pre>
+
+If you want to access the route using Composition API, there is a global useRoute function that will allow you to access the route
+
+```vue
+<script setup lang="ts">
+const route = useRoute();
+
+if (route.params.group === "admins" && !route.params.id) {
+  console.log("Warning! Make sure user is authenticated!");
+}
+</script>
+```
