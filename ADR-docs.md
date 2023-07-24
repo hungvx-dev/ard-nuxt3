@@ -224,7 +224,7 @@ If you want a parameter to be optional, you must enclose it in double square bra
 └── pages
     └── [[slug]] (will match `/test`, `/carts`, ...)
         └── index.vue (will match `/`)
-</pre
+</pre>
 
 #### Navigation
 
@@ -262,15 +262,15 @@ Nuxt offers route validation via the validate property in definePageMeta in each
 
 **Example**: allow only numbers.
 
-<!-- ```vue -->
-<!-- <script setup lang="ts"> -->
-<!-- definePageMeta({ -->
-<!--   validate: async (route) => { -->
-<!--     // Check if the id is made up of digits -->
-<!--     return /^\d+$/.test(route.params.id) -->
-<!--   } -->
-<!-- }) -->
-<!-- </script> -->
-<!-- ``` -->
+```vue
+<script setup lang="ts">
+definePageMeta({
+  validate: async (route) => {
+    // Check if the id is made up of digits
+    return /^\d+$/.test(route.params.id);
+  },
+});
+</script>
+```
 
 ### Data fetching
