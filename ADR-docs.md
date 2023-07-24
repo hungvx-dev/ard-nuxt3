@@ -139,9 +139,9 @@ In Nuxt, creating these components in the `components/` directory, and they will
 
 Pages represent views for each specific route pattern. Every file in the `pages/` directory represents a different route displaying its content.
 
-::code-group
+**pages/index.vue**
 
-```vue {title="main.go"}
+```vue
 <template>
   <div>
     <h1>Welcome to the homepage</h1>
@@ -150,7 +150,9 @@ Pages represent views for each specific route pattern. Every file in the `pages/
 </template>
 ```
 
-```vue [pages/about.vue]
+**pages/about.vue**
+
+```vue
 <template>
   <section>
     <p>This page will be displayed at the /about route.</p>
@@ -158,7 +160,42 @@ Pages represent views for each specific route pattern. Every file in the `pages/
 </template>
 ```
 
-::
+#### Layouts
+
+Layouts are wrappers around pages that contain a common User Interface for several pages, such as a header and footer display.
+
+**layouts/default.vue**
+
+```vue [layouts/default.vue]
+<template>
+  <div>
+    <AppHeader />
+    <slot />
+    <AppFooter />
+  </div>
+</template>
+```
+
+**pages/index.vue**
+
+```vue [pages/index.vue]
+<template>
+  <div>
+    <h1>Welcome to the homepage</h1>
+    <AppAlert> This is an auto-imported component </AppAlert>
+  </div>
+</template>
+```
+
+**pages/about.vue**
+
+```vue [pages/about.vue]
+<template>
+  <section>
+    <p>This page will be displayed at the /about route.</p>
+  </section>
+</template>
+```
 
 ### Assets
 
