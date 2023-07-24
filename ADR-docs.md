@@ -135,11 +135,56 @@ For example, the file `/pages/products/banana.vue` will have the URL `https://ww
 
 #### Nested Routes
 
+It is possible to display nested routes with <NuxtPage>.
+
+<pre>
+└── pages
+    └── parent
+    │   ├── child.vue
+    │   └── index.vue (will match `/products`)
+    └── parent.vue
+</pre>
+
+This file tree will generate these routes:
+
+```ts
+[
+  {
+    path: "/parent",
+    component: "~/pages/parent.vue",
+    name: "parent",
+    children: [
+      {
+        path: "",
+        component: "~/pages/parent/index.vue",
+        name: "parent-index",
+      },
+      {
+        path: "child",
+        component: "~/pages/parent/child.vue",
+        name: "parent-child",
+      },
+    ],
+  },
+];
+```
+
+To display the child.vue component, you have to insert the <NuxtPage> component inside pages/parent.vue:
+
+```vue
+<template>
+  <div>
+    <h1>I am the parent view</h1>
+    <NuxtPage />
+  </div>
+</template>
+```
+
 #### Dynamic Routes
 
 If you place anything within square brackets, it will be turned into a dynamic route parameter. You can mix and match multiple parameters and even non-dynamic text within a file name or directory.
 
-**Example**
+**Example:**
 
 - Dynamic on files
 
@@ -151,6 +196,7 @@ If you place anything within square brackets, it will be turned into a dynamic r
 </pre>
 
 - Dynamic on folders
+
 <pre>
 └── pages
     └── products
@@ -163,30 +209,73 @@ If you place anything within square brackets, it will be turned into a dynamic r
 </pre>
 
 - Dynamic on folder name
+
 <pre>
 └── pages
     └── users-[group]
-        └── index.vue (will match `/users-admin`, `/users-staff`, ...)
+        └── index.vue (will match `/users-admins`, `/users-staff`, ...)
 </pre>
 
 If you want a parameter to be optional, you must enclose it in double square brackets.
 
-**Example**
+**Example:**
 
 <pre>
 └── pages
     └── [[slug]] (will match `/test`, `/carts`, ...)
         └── index.vue (will match `/`)
-</pre>
+</pre
 
-If you want to access the route using Composition API, there is a global useRoute function that will allow you to access the route
+#### Navigation
+
+The <NuxtLink> component links pages between them. It renders an <a> tag with the href attribute set to the route of the page. Once the application is hydrated, page transitions are performed in JavaScript by updating the browser URL. This prevents full-page refreshes and allows for animated transitions.
+
+**Example:**
+
+```vue
+<template>
+  <header>
+    <nav>
+      <ul>
+        <li><NuxtLink to="/">Home</NuxtLink></li>
+        <li><NuxtLink to="/about">About</NuxtLink></li>
+        <li><NuxtLink to="/products">Products</NuxtLink></li>
+        <li><NuxtLink to="/products/1">Products 1</NuxtLink></li>
+        <li><NuxtLink to="/products/2">Products 2</NuxtLink></li>
+      </ul>
+    </nav>
+  </header>
+</template>
+```
+
+#### Route Middleware
+
+There are three kinds of route middleware:
+
+1.  Anonymous (or inline) route middleware, which are defined directly in the pages where they are used.
+2.  Named route middleware, which are placed in the **middleware/** directory and will be automatically loaded via asynchronous import when used on a page. (Note: The route middleware name is normalized to kebab-case, so someMiddleware becomes some-middleware.)
+3.  Global route middleware, which are placed in the **middleware/** directory (with a .global suffix) and will be automatically run on every route change.
+
+#### Route Validation
+
+Nuxt offers route validation via the validate property in definePageMeta in each page you wish to validate.
+
+**Example:** allow only numbers.
 
 ```vue
 <script setup lang="ts">
-const route = useRoute();
-
-if (route.params.group === "admins" && !route.params.id) {
-  console.log("Warning! Make sure user is authenticated!");
-}
+definePageMeta({
+  validate: async (route) => {
+    // Check if the id is made up of digits
+    return /^\d+$/.test(route.params.id)
+  }
+})
 </script>
+
+```
+
+### Data fetching
+
+-
+
 ```
