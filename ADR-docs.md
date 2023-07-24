@@ -114,9 +114,9 @@ By default, Nuxt will treat this file as the entrypoint and render its content f
 
 In Nuxt, creating these components in the `components/` directory, and they will be automatically available across your application without having to explicitly import them.
 
-::code-group
+**app.vue**
 
-```vue [app.vue]
+```vue
 <template>
   <div>
     <h1>Welcome to the homepage</h1>
@@ -125,7 +125,9 @@ In Nuxt, creating these components in the `components/` directory, and they will
 </template>
 ```
 
-```vue [components/AppAlert.vue]
+**components/AppAlert.vue**
+
+```vue
 <template>
   <span>
     <slot />
@@ -133,15 +135,13 @@ In Nuxt, creating these components in the `components/` directory, and they will
 </template>
 ```
 
-::
-
 #### Pages
 
 Pages represent views for each specific route pattern. Every file in the `pages/` directory represents a different route displaying its content.
 
 ::code-group
 
-```vue [pages/index.vue]
+```vue {title="main.go"}
 <template>
   <div>
     <h1>Welcome to the homepage</h1>
