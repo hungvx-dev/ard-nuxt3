@@ -14,6 +14,8 @@
 - Code splitting: Nuxt automatically splits your code into smaller chunks, which can help reduce the initial load time of your application.
 - Server-side rendering out of the box: Nuxt comes with built-in SSR capabilities, so you don't have to set up a separate server yourself.
 - Better performance on low-powered devices: it reduces the amount of JavaScript that needs to be downloaded and executed on the client-side, which can be beneficial for low-powered devices that may struggle with processing heavy JavaScript applications.
+- It offers automatic code splitting, hot module replacement in development, a robust routing system with asynchronous data, and an auto-updating server for easy development out of the box
+- Nuxt.js provides you with an opinionated structure and setup for easy development
 
 ##### Cons:
 
@@ -21,6 +23,7 @@
 - There's a relatively small community behind it:
   - The product documentation is not that extensive
   - Fewer resources for you to dig into at need
+- Working with custom libraries in Nuxt.js can be difficult
 
 ### Nuxt.js Concepts
 
@@ -47,6 +50,9 @@
 │   ├── default.vue
 │   └── products.vue
 ├── middleware
+│   ├── auth.vue
+│   ├── analytics.global.ts
+│   └── setup.global.ts
 ├── pages
 │   ├── about.vue
 │   ├── carts
@@ -357,6 +363,32 @@ There are three kinds of route middleware:
 2.  Named route middleware, which are placed in the **middleware/** directory and will be automatically loaded via asynchronous import when used on a page. (Note: The route middleware name is normalized to kebab-case, so someMiddleware becomes some-middleware.)
 3.  Global route middleware, which are placed in the **middleware/** directory (with a .global suffix) and will be automatically run on every route change.
 
+**Example**
+
+`auth.vue` is Named route middleware and `setup.global.vue` is global route middleware
+
+<pre>
+├── middleware
+    ├── auth.vue
+    ├── analytics.global.ts
+    └── setup.global.ts
+</pre>
+
+Inline route middleware
+
+```vue
+<script setup lang="ts">
+definePageMeta({
+  middleware: [
+    function (to, from) {
+      // Custom inline middleware
+    },
+    "auth",
+  ],
+});
+</script>
+```
+
 #### Route Validation
 
 Nuxt offers route validation via the validate property in definePageMeta in each page you wish to validate.
@@ -386,4 +418,42 @@ const { data: count } = await useFetch("/api/count");
 </script>
 
 <template>Page visits: {{ count }}</template>
+```
+
+### Modules
+
+Modules are Nuxt.js extensions which can extend its core functionality and add endless integrations and simply functions that are called sequentially when booting Nuxt.
+
+List several of Nuxt.js modules:
+
+- Devtools
+  - @nuxtjs/eslint-module
+  - nuxt-vitest
+- Extensions
+  - @pinia/nuxt
+  - @nuxtjs/i18n
+- Libraries
+  - nuxt-lodash
+  - dayjs-nuxt
+  - @vueuse/nuxt
+- UI
+  - @nuxtjs/tailwindcss
+  - @element-plus/nuxt
+
+Usage
+
+**nuxt.config.ts**
+
+```ts
+export default defineNuxtConfig({
+  modules: [
+    "@nuxtjs/eslint-module",
+    "@element-plus/nuxt",
+    "@nuxtjs/tailwindcss",
+    "nuxt-lodash",
+    "@vueuse/nuxt",
+    "@pinia/nuxt",
+    "@nuxtjs/i18n",
+  ],
+});
 ```
