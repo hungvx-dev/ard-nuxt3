@@ -96,6 +96,70 @@
 
 ### Views
 
+Nuxt provides several component layers to implement the user interface of your application.
+
+#### `app.vue`
+
+By default, Nuxt will treat this file as the entrypoint and render its content for every route of the application.
+
+```vue
+<template>
+  <div>
+    <h1>Welcome to the homepage</h1>
+  </div>
+</template>
+```
+
+#### Components
+
+In Nuxt, creating these components in the `components/` directory, and they will be automatically available across your application without having to explicitly import them.
+
+::code-group
+
+```vue [app.vue]
+<template>
+  <div>
+    <h1>Welcome to the homepage</h1>
+    <AppAlert> This is an auto-imported component. </AppAlert>
+  </div>
+</template>
+```
+
+```vue [components/AppAlert.vue]
+<template>
+  <span>
+    <slot />
+  </span>
+</template>
+```
+
+::
+
+#### Pages
+
+Pages represent views for each specific route pattern. Every file in the `pages/` directory represents a different route displaying its content.
+
+::code-group
+
+```vue [pages/index.vue]
+<template>
+  <div>
+    <h1>Welcome to the homepage</h1>
+    <AppAlert> This is an auto-imported component </AppAlert>
+  </div>
+</template>
+```
+
+```vue [pages/about.vue]
+<template>
+  <section>
+    <p>This page will be displayed at the /about route.</p>
+  </section>
+</template>
+```
+
+::
+
 ### Assets
 
 Nuxt uses two directories to handle assets like stylesheets, fonts or images.
@@ -274,3 +338,15 @@ definePageMeta({
 ```
 
 ### Data fetching
+
+Nuxt comes with two composables and a built-in library to perform data-fetching in browser or server environments: useFetch, useAsyncData and $fetch. By default, data fetching composables will perform their asynchronous function on both client and server environments.
+
+**Example:**
+
+```vue
+<script setup lang="ts">
+const { data: count } = await useFetch("/api/count");
+</script>
+
+<template>Page visits: {{ count }}</template>
+```
