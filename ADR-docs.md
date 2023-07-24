@@ -1,12 +1,12 @@
-### Context and Problem Statement
+## Context and Problem Statement
 
 ...
 
-### Why NuxtJS
+## Why NuxtJS
 
 ...
 
-### Considered Options
+## Considered Options
 
 ##### Pros:
 
@@ -27,7 +27,7 @@
 - Nuxt is a JavaScript framework and it was built on top of Vue.js to help developers with creating performance web applications and super-fast static websites. It gives a simpler way to create universal or single-page Vue apps.
 - It helps you boost your SPAs' SEO, it enables you to generate your apps both on the server-side and statically.
 
-#### Directory structure
+### Directory structure
 
 <pre>
 ├── .nuxt
@@ -169,7 +169,7 @@ This file tree will generate these routes:
 ];
 ```
 
-To display the child.vue component, you have to insert the <NuxtPage> component inside pages/parent.vue:
+To display the child.vue component, you have to insert the `<NuxtPage>` component inside pages/parent.vue:
 
 ```vue
 <template>
@@ -228,9 +228,9 @@ If you want a parameter to be optional, you must enclose it in double square bra
 
 #### Navigation
 
-The <NuxtLink> component links pages between them. It renders an <a> tag with the href attribute set to the route of the page. Once the application is hydrated, page transitions are performed in JavaScript by updating the browser URL. This prevents full-page refreshes and allows for animated transitions.
+The `<NuxtLink>` component links pages between them. It renders an `<a>` tag with the href attribute set to the route of the page. Once the application is hydrated, page transitions are performed in JavaScript by updating the browser URL. This prevents full-page refreshes and allows for animated transitions.
 
-**Example:**
+**Example**:
 
 ```vue
 <template>
@@ -260,22 +260,17 @@ There are three kinds of route middleware:
 
 Nuxt offers route validation via the validate property in definePageMeta in each page you wish to validate.
 
-**Example:** allow only numbers.
+**Example**: allow only numbers.
 
-```vue
-<script setup lang="ts">
-definePageMeta({
-  validate: async (route) => {
-    // Check if the id is made up of digits
-    return /^\d+$/.test(route.params.id)
-  }
-})
-</script>
-
-```
+<!-- ```vue -->
+<!-- <script setup lang="ts"> -->
+<!-- definePageMeta({ -->
+<!--   validate: async (route) => { -->
+<!--     // Check if the id is made up of digits -->
+<!--     return /^\d+$/.test(route.params.id) -->
+<!--   } -->
+<!-- }) -->
+<!-- </script> -->
+<!-- ``` -->
 
 ### Data fetching
-
--
-
-```
