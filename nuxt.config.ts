@@ -18,6 +18,10 @@ export default defineNuxtConfig({
     prefix: '_',
     upperAfterPrefix: false
   },
+  ssr: true,
+  routeRules: {
+    '/pages/about': { ssr: false }
+  },
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',
     configPath: 'tailwind.config',
