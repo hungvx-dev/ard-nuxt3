@@ -3,26 +3,19 @@
     <header>
       <nav>
         <li>
-          <NuxtLink to="/">
-            Home
-          </NuxtLink>
+          <NuxtLink to="/"> Home </NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/about">
-            About
-          </NuxtLink>
+          <NuxtLink to="/about"> About </NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/products">
-            Products
-          </NuxtLink>
+          <NuxtLink to="/products"> Products </NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/carts">
-            carts
-          </NuxtLink>
+          <NuxtLink to="/carts"> carts </NuxtLink>
         </li>
         <a href="/about">about</a>
+        <li><NuxtLink to="/tsx-file">TSX File</NuxtLink></li>
       </nav>
     </header>
 

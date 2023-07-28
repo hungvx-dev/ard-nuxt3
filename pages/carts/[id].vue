@@ -4,7 +4,8 @@
 
 <script setup lang="ts">
 definePageMeta({
-  layout: 'carts'
+  layout: 'carts',
+  middleware: ['auth']
 })
 const route = useRoute()
 const a = ref(1)

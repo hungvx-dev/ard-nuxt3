@@ -1,21 +1,31 @@
-## Context and Problem Statement
+# Architecture Decision Record: Nuxt3 framework
 
-...
+## Summary
 
-## Why NuxtJS
+### Issue:
+- We want to use a framework to create our web applications:
+  - We want to be widely known (support SEO).
+  - We want user experience to be fast and reliable, on all popular browsers and screen sizes.
+  - We want it to be written based on VueJS syntax, features (similar to NextJS based on ReactJS).
 
-...
+### Decision:
+- Decided on Nuxt.
 
-## Considered Options
+### Status:
+- Nuxt3 is open source and Nuxt is an intuitive and extendable way to create type-safe, performant and production-grade full-stack web apps and websites with Vue 3.
+
+## Details
 
 ##### Pros:
-
+- The page structure follows a certain framework.
 - It's great for SEO: it solves all the SEO issues that single-page apps are reputed for (client-rendered content, mobile web performance, URL and routing, etc.).
 - Code splitting: Nuxt automatically splits your code into smaller chunks, which can help reduce the initial load time of your application.
 - Server-side rendering out of the box: Nuxt comes with built-in SSR capabilities, so you don't have to set up a separate server yourself.
 - Better performance on low-powered devices: it reduces the amount of JavaScript that needs to be downloaded and executed on the client-side, which can be beneficial for low-powered devices that may struggle with processing heavy JavaScript applications.
-- It offers automatic code splitting, hot module replacement in development, a robust routing system with asynchronous data, and an auto-updating server for easy development out of the box
-- Nuxt.js provides you with an opinionated structure and setup for easy development
+- It offers automatic code splitting, hot module replacement in development, a robust routing system with asynchronous data, and an auto-updating server for easy development out of the box.
+- Nuxt.js provides you with an opinionated structure and setup for easy development.
+- For jsx syntax no need to configure.
+- Powerful middleware easy to use
 
 ##### Cons:
 
@@ -24,6 +34,7 @@
   - The product documentation is not that extensive
   - Fewer resources for you to dig into at need
 - Working with custom libraries in Nuxt.js can be difficult
+- For jsx syntax there are many limitations as NuxtLink auto import is not supported and must wait until this PR [issue](https://github.com/nuxt/nuxt/pull/22330) is released.
 
 ### Nuxt.js Concepts
 
