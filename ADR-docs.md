@@ -8,9 +8,6 @@
   - We want user experience to be fast and reliable, on all popular browsers and screen sizes.
   - We want it to be written based on VueJS syntax, features (similar to NextJS based on ReactJS).
 
-### Decision:
-- Decided on Nuxt.
-
 ### Status:
 - Nuxt3 is open source and Nuxt is an intuitive and extendable way to create type-safe, performant and production-grade full-stack web apps and websites with Vue 3.
 
