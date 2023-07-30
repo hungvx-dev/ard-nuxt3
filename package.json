@@ -23,7 +23,7 @@
     "@vueuse/nuxt": "^10.2.1",
     "element-plus": "^2.3.7",
     "eslint": "^8.44.0",
-    "nuxt": "^3.6.1",
+    "nuxt": "^3.6.5",
     "nuxt-lodash": "^2.5.0",
     "pinia": "^2.1.4",
     "typescript": "*"

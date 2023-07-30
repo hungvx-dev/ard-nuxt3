@@ -6,8 +6,6 @@
 definePageMeta({
   layout: 'products'
 })
-const counterStore = useCounter()
-console.log(counterStore.n)
 </script>
 
 <style scoped></style>
