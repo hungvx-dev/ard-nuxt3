@@ -73,6 +73,6 @@ const hello = () => ElMessage.info('hello world')
 const helloSuccess = () => ElMessage.success('hello world')
 
 watch(() => counterStore.theme, (value) => {
-  colorMode.value = value
+  colorMode.preference = value
 })
 </script>

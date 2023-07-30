@@ -4,10 +4,11 @@
   </div>
 </template>
 <script setup>
-const counterStore = useCounter()
 const colorMode = useColorMode()
+const counterStore = useCounter()
 onMounted(() => {
-  colorMode.value = counterStore.theme
+  counterStore.theme = colorMode.value
+  colorMode.preference = colorMode.value
 })
 </script>
 <style>
