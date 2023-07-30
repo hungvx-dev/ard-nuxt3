@@ -1,6 +1,7 @@
 export const useCounter = defineStore('counter', {
   state: () => ({
-    counter: 1
+    counter: 1,
+    theme: 'light'
   }),
 
   getters: {

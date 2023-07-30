@@ -1,10 +1,12 @@
 <template>
   <el-switch
-    v-model="test"
+    v-model="counterStore.theme"
     inline-prompt
     active-text="dark"
     inactive-text="light"
     size="large"
+    active-value="dark"
+    inactive-value="light"
   />
 
   <br>
@@ -64,9 +66,13 @@
 
 <script setup lang="ts">
 import en from 'element-plus/es/locale/lang/en'
-
+const counterStore = useCounter()
+const colorMode = useColorMode()
 const timeValue = ref('')
 const hello = () => ElMessage.info('hello world')
 const helloSuccess = () => ElMessage.success('hello world')
-const test = ref('dark')
+
+watch(() => counterStore.theme, (value) => {
+  colorMode.value = value
+})
 </script>
